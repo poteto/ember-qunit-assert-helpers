@@ -37,12 +37,12 @@ export default function() {
 
     if (typeof ret === 'object' && ret !== null && typeof ret.then === 'function') {
       // handle async
-      return Ember.RSVP.Promise((resolve, reject) => {
+      return new Ember.RSVP.Promise((resolve, reject) => {
         if (error) reject(error)
         else resolve(ret);
       }).catch(reason => {
           handleError(assertion, reason, matcher)
-        }).finally(() => cleanup(origTestAdapter));;
+        }).finally(() => cleanup(origTestAdapter));
     } else {
         handleError(assertion, error, matcher);
         cleanup(origTestAdapter);
